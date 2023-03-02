@@ -15,7 +15,7 @@ pipeline {
         stage("test") {
             when {
                 expression {
-                    ${env.BUILD_NUMBER} == 12
+                    "${env.BUILD_NUMBER}" == 13
                 }
             }
             steps {
