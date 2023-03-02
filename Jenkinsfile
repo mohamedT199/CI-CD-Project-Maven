@@ -10,7 +10,7 @@ pipeline {
         gradle 'gradel-basic'
     }
     environment {
-        NEW_VERSION = env.BUILD_NUMBER
+        NEW_VERSION = "${env.BUILD_NUMBER}"
         SERVER_CREDENTIALS = credentials("server-deployment")
     }
     stages {
