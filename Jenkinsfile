@@ -22,7 +22,7 @@ pipeline {
                 echo 'deploying the applicstion ..'
                 echo "this is global environment variable ${SERVER_CREDENTIALS}"
                 withCredentials([
-                    usernamePassword(credentials: 'server-deployment' , usernameVariable: $USER , passwordVariable: $PWD )
+                    usernamePassword(credentials: 'server-deployment' , usernameVariable: 'USER' , passwordVariable: 'PWD' )
                     ]){
                         echo "${USER}"
                     
