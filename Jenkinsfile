@@ -16,8 +16,8 @@ pipeline {
     stages {
         stage("build") {
             steps {
-                sh -c 'mvn install'
-                sh -c 'mvn package'
+                sh 'mvn install'
+                sh 'mvn package'
                 echo 'building the application ...'
                 echo "this is the new Verion of new Build ${NEW_VERSION}"
                 echo "this is the Branch name that we use iit to Build ${env.BRANCH_NAME}"
