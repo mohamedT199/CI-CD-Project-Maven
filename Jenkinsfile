@@ -1,6 +1,6 @@
 pipeline {
     agent any 
-    params {
+    parameters {
         string(name: 'version' ,  defaultValue: '1.0.1' , description: 'value of version')
         booleanParam(name: 'runTest' , defaultValue: true , description: 'is run test or no ')
         choice(name: 'versionChoice' , choices: ['1.0.1' , '1.0.2'] , description: 'chloise what version you need')
