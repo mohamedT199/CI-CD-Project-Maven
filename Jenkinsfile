@@ -15,7 +15,7 @@ pipeline {
         stage("test") {
             when {
                 expression {
-                    "${env.BUILD_NUMBER}" == "16" && $BUILD_NUMBER == 16 
+                    "${env.BUILD_NUMBER}" == "17" && "$BUILD_NUMBER" == "17"
                 }
             }
             steps {
