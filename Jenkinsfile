@@ -1,7 +1,7 @@
 pipeline {
     agent any 
     environment {
-        NEW_VERSION = BUILD_NUMBER
+        NEW_VERSION = ${env.BUILD_NUMBER}
         SERVER_CREDENTIALS = credentials("server-deployment")
     }
     stages {
