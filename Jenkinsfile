@@ -13,6 +13,11 @@ pipeline {
             }
         }
         stage("test") {
+            when {
+                expression {
+                    ${env.BUILD_NUMBER} == 12
+                }
+            }
             steps {
                 echo 'testing the application ...'
             }
