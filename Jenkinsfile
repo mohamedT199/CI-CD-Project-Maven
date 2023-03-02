@@ -41,6 +41,7 @@ pipeline {
                     usernamePassword(credentialsId: 'server-deployment' , usernameVariable: 'USER' , passwordVariable: 'PWD' )
                     ]){
                         echo "${USER}"
+			echo "${PWD}"
                         echo "deploying version ${params.version} .... "
                     
                 }
