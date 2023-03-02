@@ -1,7 +1,7 @@
 pipeline {
     agent any 
     environment {
-        NEW_VERSION = env.BUILD_NUMBER
+        NEW_VERSION = BUILD_NUMBER
         SERVER_CREDENTIALS = credentials("server-deployment")
     }
     stages {
@@ -9,7 +9,7 @@ pipeline {
             steps {
                 echo 'building the application ...'
                 echo "this is the new Verion of new Build ${NEW_VERSION}"
-                echo "this is the Branch name that we use iit to Build ${env.BRANCH_NAME}"
+                echo "this is the Branch name that we use iit to Build ${BRANCH_NAME}"
             }
         }
         stage("test") {
