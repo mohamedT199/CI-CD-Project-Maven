@@ -32,7 +32,7 @@ pipeline {
                 sh 'mvn package'
                 echo 'building the application ...'
                 echo "this is the new Verion of new Build ${NEW_VERSION}"
-                echo "this is the Branch name that we use iit to Build ${env.BRANCH_NAME}"
+                echo "this is the Branch name that we use iit to Build ${env.GIT_BRANCH}"
             }
         }
         stage("test") {
@@ -51,18 +51,10 @@ pipeline {
             }
         }
         stage("deploy") {
-            input {
-                message: "deploy Environment"
-                ok : "Deploy" 
-                parameters {
-                    choice(name : "Environemnt" , choices: ["stage" , "development" , "production"] , description: "choice your Deployment Environment")
-                }
-            }
             
             steps {
                 script{
                     stepsLogic.getDeploymentMessage()
-                    env.Environments = input message: "deploy Environment" , ok : "Deploy" ,  parameters : [choice(name : "Environemnt" , choices: ["stage" , "development" , "production"] , description: "choice your Deployment Environment") , choice(name : "Environemnt" , choices: ["stage" , "development" , "production"] , description: "choice your Deployment Environment")]
                     
                 }
                 echo 'deploying the applicstion ..'
@@ -75,14 +67,6 @@ pipeline {
                         echo "deploying version ${params.version} .... "
 
                 }
-                echo "-----------------------------------------------------------------------"
-                echo "this is first variable only thhe first ${env.Environment}"
-                echo "this is first variable assigned to other ${env.Environments}"
-            }
-        }
-        stage(afterDeloyment){
-            steps {
-                echo "thisis accessed to other stage from the assigned variable${env.Environments}"
             }
         }
     }
