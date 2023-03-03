@@ -33,7 +33,6 @@ pipeline {
         }
         stage('ProdDeploy'){
             steps {
-            steps {
                 script {
                     gv.DeployArtifact()
          	}
