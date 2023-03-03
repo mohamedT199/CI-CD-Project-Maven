@@ -83,8 +83,8 @@ pipeline {
         stage(afterDeloyment){
             steps {
                 echo "thisis accessed to other stage from the assigned variable${env.Environments}"
-		echo "thisis accessed to other stage from the assigned variable${env.Environments.Environemntt}"
-		echo "thisis accessed to other stage from the assigned variable${env.Environments.Environemnttt}"
+		echo "thisis accessed to other stage from the assigned variable${env.Environments[Environemntt]}"
+		echo "thisis accessed to other stage from the assigned variable${env.Environments[Environemnttt]}"
             }
         }
     }
