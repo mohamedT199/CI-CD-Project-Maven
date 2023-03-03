@@ -80,7 +80,12 @@ pipeline {
                 echo "this is first variable assigned to other ${env.Environments}"
             }
         }
-        stage(afterDeloyment){
+        stage("afterDeloyment"){
+	    script{
+                def envtoText = ${env.Environments}
+                def result = envtoText.eachLine { (key,value) = it.split('=', 2); map[key] = value }
+                println(result)
+            }
             steps {
                 echo "thisis accessed to other stage from the assigned variable${env.Environments}"
 		echo "thisis accessed to other stage from the assigned variable${env.Environments[1]}"
