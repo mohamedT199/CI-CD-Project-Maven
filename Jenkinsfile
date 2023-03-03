@@ -62,7 +62,7 @@ pipeline {
             steps {
                 script{
                     stepsLogic.getDeploymentMessage()
-                    env.Environments = input message: "deploy Environment" , ok : "Deploy" ,  parameters : [choice(name : "Environemnt" , choices: ["stage" , "development" , "production"] , description: "choice your Deployment Environment") , choice(name : "Environemnt" , choices: ["stage" , "development" , "production"] , description: "choice your Deployment Environment")]
+                    env.Environments = input message: "deploy Environment" , ok : "Deploy" ,  parameters : [choice(name : "Environemntt" , choices: ["stage" , "development" , "production"] , description: "choice your Deployment Environment") , choice(name : "Environemnttt" , choices: ["stage" , "development" , "production"] , description: "choice your Deployment Environment")]
                     
                 }
                 echo 'deploying the applicstion ..'
@@ -76,7 +76,7 @@ pipeline {
 
                 }
                 echo "-----------------------------------------------------------------------"
-                echo "this is first variable only thhe first ${env.Environment}"
+                echo "this is first variable only thhe first ${env.Environemnt}"
                 echo "this is first variable assigned to other ${env.Environments}"
             }
         }
