@@ -83,15 +83,10 @@ pipeline {
         stage("afterDeloyment"){
 	    
             steps {
-                script {
-    	            def envtoText = ${env.Environments}
-        	    def result = envtoText.eachLine { (key,value) = it.split('=', 2); map[key] = value }
-                    println(result)
-    	        }
-
                 echo "thisis accessed to other stage from the assigned variable${env.Environments}"
-		echo "thisis accessed to other stage from the assigned variable${env.Environments[1]}"
-		echo "thisis accessed to other stage from the assigned variable${env.Environments[1]}"
+		//needed to access on var inside multi vars
+		//echo "thisis accessed to other stage from the assigned variable${env.Environments[1]}"
+		//echo "thisis accessed to other stage from the assigned variable${env.Environments[1]}"
             }
         }
     }
