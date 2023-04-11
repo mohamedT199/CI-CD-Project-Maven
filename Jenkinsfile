@@ -58,5 +58,16 @@ pipeline {
             
         }
     }
+    post {
+        
+        success{
+            git add . 
+            git commit -m "change version"
+            git push origin HEAD:jenkins-jobs
+        }
+        failure {
+            git restore . 
+        }
+    }
 }
 
