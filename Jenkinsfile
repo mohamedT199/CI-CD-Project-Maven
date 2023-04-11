@@ -21,6 +21,8 @@ pipeline {
                     versions:commit'
                     
                     def matcher = readFile('pom.xml') =~ '<version>(.+)</version>'
+                    echo "${matcher}"
+                    echo "${matcher[0]}"
                     Image_Name = matcher[0][1]
                 
                 }
