@@ -67,6 +67,7 @@ pipeline {
         }
         failure {
             git restore . 
+            git status 
         }
     }
 }
