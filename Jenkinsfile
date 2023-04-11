@@ -13,10 +13,24 @@ pipeline {
                 }
             }
         }
+        stage('Increment Version'){
+            steps{
+                script{
+                    sh 'mvn build-helper:parse-version versions:set \
+                    -DnewVersion=\\\${parsedVersion.majorVersion}.\\\${parsedVersion.minorVersion}.\\\${parsedVersion.nextIncrementalVersion} \
+                    versions:commit'
+                    
+                    def matcher = readFile(pom.xml) =~ '<version>(.+)</version>'
+                    Image_Name = matcher[0][1]
+                
+                }
+            }
+        }
         stage('BuildJar'){
             steps {
                 script {
                     gv.BuildJar()
+                    echo "${Image_Name}"
                 }
                 
             }
