@@ -30,7 +30,6 @@ pipeline {
             steps {
                 script {
                     gv.BuildJar()
-                    echo "${Image_Name}"
                 }
                 
             }
