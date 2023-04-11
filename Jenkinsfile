@@ -23,7 +23,8 @@ pipeline {
                     def matcher = readFile('pom.xml') =~ '<version>(.+)</version>'
                     echo "${matcher}"
                     echo "${matcher[0]}"
-                    Image_Name = matcher[0][1]
+                    def version = matcher[0][1]
+                    Image_Name = "${version}-$BUILD_NUMBER"
                 
                 }
             }
@@ -58,17 +59,6 @@ pipeline {
             
         }
     }
-    post {
-        
-        success{
-            git add . 
-            git commit -m "change version"
-            git push origin HEAD:jenkins-jobs
-        }
-        failure {
-            git restore . 
-            git status 
-        }
-    }
+   
 }
 
