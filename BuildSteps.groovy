@@ -1,6 +1,6 @@
 def BuildJar(){
     echo "Building Artifact Start ...."
-    sh "mvn package"
+    sh "mvn clean package"
     
 }
 def BuildImage(){
