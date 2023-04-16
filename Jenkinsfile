@@ -1,7 +1,12 @@
+#!/usr/bin/env groovy
+
+@Library('Jenkiins-Shared-Library')
 def gv
 pipeline {
     agent any
-    
+    parameters{
+        choice(name:'deploy' , choices:['Yes' , 'No'] , description:'you want t deploy new version or not')
+    }
     tools {
         maven 'maven-basic'
     }
@@ -13,47 +18,43 @@ pipeline {
                 }
             }
         }
-        stage('Increment Version'){
+        stage('Version Increment'){
             steps{
                 script{
-                    sh 'mvn build-helper:parse-version versions:set \
-                    -DnewVersion=\\\${parsedVersion.majorVersion}.\\\${parsedVersion.minorVersion}.\\\${parsedVersion.nextIncrementalVersion} \
-                    versions:commit'
-                    
-                    def matcher = readFile('pom.xml') =~ '<version>(.+)</version>'
-                    echo "${matcher}"
-                    echo "${matcher[0]}"
-                    def version = matcher[0][1]
-                    Image_Name = "${version}-$BUILD_NUMBER"
-                
+                    bumpVersion()
                 }
             }
         }
-        stage('BuildJar'){
+        stage('Build Artifact'){
             steps {
                 script {
-                    gv.BuildJar()
-                    echo "${Image_Name}"
-                    
+                    buildArtifact()
                 }
                 
             }
             
         }
-        stage('BuildImage'){
+        stage('Docker Login'){
             steps {
                 script {
-                    gv.BuildImage()
+                    logintoRepo('Docker-Hub')
+                }
+            }
+        }
+        stage('Build Docker Image'){
+            steps {
+                script {
+                    buildDockerImage('Docker-Hub')
                 }
                 
             }
             
         }
-        stage('ProdDeploy'){
+        stage('Deploy'){
             steps {
                 script {
                     gv.DeployArtifact()
-         	}
+         	    }
             }
 
             
@@ -62,15 +63,12 @@ pipeline {
     post {
     
         success {
-        
-            sh " git add . "
-            sh "git commit -m 'change version' "
+
+            sh "git add . "
+            sh "git commit -m 'CI: version bump' "
             sh "git push origin HEAD:jenkins-jobs"
         }
-        failure {
-        
-            sh "git restore . "
-        }
+
     }
    
 }

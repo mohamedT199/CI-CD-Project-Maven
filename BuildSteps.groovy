@@ -1,3 +1,4 @@
+#!/usr/bin/env groovy
 def BuildJar(){
     echo "Building Artifact Start ...."
     sh "mvn clean package"
